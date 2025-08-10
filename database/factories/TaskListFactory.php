@@ -18,7 +18,7 @@ class TaskListFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->unique()->sentence(rand(3,4), false),
+            'name' => fake()->unique()->sentence(rand(3,4), false),
             'user_id' => User::factory(),
         ];
     }
