@@ -19,7 +19,7 @@ class TaskFactory extends Factory
     {
         return [
             'title' => fake()->unique()->sentence(rand(3,4), false),
-            'description' => fake()->description(),
+            'description' => fake()->text(),
             'done_at' => null,
             'task_list_id' => TaskList::factory()
         ];
