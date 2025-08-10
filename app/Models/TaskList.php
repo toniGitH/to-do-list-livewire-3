@@ -9,4 +9,14 @@ class TaskList extends Model
 {
     /** @use HasFactory<\Database\Factories\TaskListFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'user_id',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
