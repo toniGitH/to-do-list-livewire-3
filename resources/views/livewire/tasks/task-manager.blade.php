@@ -49,6 +49,7 @@
                         </div>
                         <div class="flex space-x-1">
                             <flux:button wire:click='editList({{ $taskList->id }})' icon="pencil" size="xs" variant="filled"></flux:button>
+                            <flux:button wire:click='deleteList({{ $taskList->id }})' icon="trash" size="xs" variant="danger"></flux:button>
                         </div>
                     </div>
                 @endforeach

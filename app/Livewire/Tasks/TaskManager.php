@@ -64,4 +64,9 @@ class TaskManager extends Component
         $this->newListName = $taskList->name;
         $this->editingList = $taskList;
     }
+
+    public function deleteList(TaskList $taskList)
+    {
+        $taskList->delete();
+    }
 }
