@@ -1,3 +1,3 @@
 <x-layouts.app :title="__('Tasks')">
-    <h1>Tasks</h1>
+    <livewire:task-manager />
 </x-layouts.app>
