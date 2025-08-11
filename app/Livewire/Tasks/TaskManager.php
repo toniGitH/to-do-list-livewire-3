@@ -12,11 +12,22 @@ class TaskManager extends Component
 
     public $newListName = "";
 
+    public $isEditing = false;
+
+    public $editingList;
+
     public function render()
     {
         return view('livewire.tasks.task-manager', [
             'taskLists' => TaskList::all()
         ]);
+    }
+
+    public function prepareCreateList()
+    {
+        $this->showCreateListForm = true;
+        $this->isEditing = false;
+        $this->newListName = "";
     }
 
     public function createList()
@@ -25,11 +36,17 @@ class TaskManager extends Component
             'newListName' => 'required|min:3|max:100|unique:task_lists,name'
         ]);
 
-        TaskList::create([
-            'name' => $this->newListName,
-            'user_id' => Auth::user()->id
-        ]);
-
+        if ($this->isEditing) {
+            $this->editingList->update([
+                'name' => $this->newListName
+            ]);
+        } else{
+            TaskList::create([
+                'name' => $this->newListName,
+                'user_id' => Auth::user()->id
+            ]);
+        }
+        
         $this->reset();
     }
 
@@ -38,5 +55,13 @@ class TaskManager extends Component
         $this->showCreateListForm = false;
         $this->newListName = '';
         $this->resetValidation();
+    }
+
+    public function editList(TaskList $taskList)
+    {
+        $this->showCreateListForm = true;
+        $this->isEditing = true;
+        $this->newListName = $taskList->name;
+        $this->editingList = $taskList;
     }
 }

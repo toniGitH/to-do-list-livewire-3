@@ -13,14 +13,14 @@
             <!-- Título y botón Nueva Lista -->
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-semibold text-gray-700 dark:text-white">Mis Listas</h2>
-                <flux:button wire:click='showCreateListForm = true' icon="plus" variant="primary">
+                <flux:button wire:click='prepareCreateList' icon="plus" variant="primary">
                     Nueva
                 </flux:button>
             </div>
 
             <!-- Formulario Nueva Lista -->
             <div wire:show='showCreateListForm' wire:transition class="mb-4 bg-gray-50 dark:bg-gray-700 p-3 rounded-md">
-                <h3 class="text-md font-medium mb-2 dark:text-white">Nueva Lista</h3>
+                <h3 class="text-md font-medium mb-2 dark:text-white">{{ $isEditing ? 'Editar' : 'Nueva' }} Lista</h3>
                 <input
                 wire:model='newListName'
                 type="text"
@@ -29,15 +29,12 @@
                 <div class="mb-4">
                     <flux:error name='newListName' />
                 </div>
-                {{-- @error('newListName')
-                    <p class="text-red-500 text-sm mb-2">{{ $message }}</p>
-                @enderror --}}
                 <div class="flex justify-end space-x-2">
                     <flux:button wire:click='cancelCreate' icon="x-mark" size="xs" variant="ghost">
                         Cancelar
                     </flux:button>
                     <flux:button wire:click='createList' icon="check" size="xs" variant="filled">
-                        Guardar
+                        {{ $isEditing ? 'Actualizar' : 'Guardar' }}
                     </flux:button>
                 </div>
             </div>
@@ -51,7 +48,7 @@
                             <p class="text-xs text-gray-500 dark:text-gray-400">({{ $taskList->tasks->count() }} tareas)</p>
                         </div>
                         <div class="flex space-x-1">
-                            <flux:button icon="pencil" size="xs" variant="filled"></flux:button>
+                            <flux:button wire:click='editList({{ $taskList->id }})' icon="pencil" size="xs" variant="filled"></flux:button>
                         </div>
                     </div>
                 @endforeach
