@@ -30,7 +30,7 @@ class TaskManager extends Component
         $this->newListName = "";
     }
 
-    public function createList()
+    public function saveList()
     {
         $this->validate([
             'newListName' => 'required|min:3|max:100|unique:task_lists,name'

@@ -33,7 +33,7 @@
                     <flux:button wire:click='cancelCreate' icon="x-mark" size="xs" variant="ghost">
                         Cancelar
                     </flux:button>
-                    <flux:button wire:click='createList' icon="check" size="xs" variant="filled">
+                    <flux:button wire:click='saveList' icon="check" size="xs" variant="filled">
                         {{ $isEditing ? 'Actualizar' : 'Guardar' }}
                     </flux:button>
                 </div>
