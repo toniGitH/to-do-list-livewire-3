@@ -7,14 +7,13 @@
   
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        <!-- Sección de Listas -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 md:col-span-1 border border-gray-200 dark:border-gray-700">
+        <!-- Sección de Listas / Panel de la izquierda -->
+        <div class="bg-gray-300 dark:bg-gray-800 rounded-lg shadow-md p-4 md:col-span-1 border border-gray-200 dark:border-gray-700">
             
+            <!-- Título y botón Nueva Lista -->
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-semibold text-gray-700 dark:text-white">Mis Listas</h2>
-                <flux:button icon="plus" variant="primary">
-                Nueva
-                </flux:button>
+                <flux:button icon="plus" variant="primary">Nueva</flux:button>
             </div>
 
             <!-- Formulario Nueva Lista -->
@@ -25,12 +24,8 @@
                 placeholder="Nombre de la lista"
                 class="w-full p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-green-500">
                 <div class="flex justify-end space-x-2">
-                <flux:button icon="x-mark" size="xs" variant="ghost">
-                    Cancelar
-                </flux:button>
-                <flux:button icon="check" size="xs" variant="filled">
-                    Guardar
-                </flux:button>
+                    <flux:button icon="x-mark" size="xs" variant="ghost">Cancelar</flux:button>
+                    <flux:button icon="check" size="xs" variant="filled">Guardar</flux:button>
                 </div>
             </div>
 
@@ -42,27 +37,25 @@
                     <span class="text-xs text-gray-500 dark:text-gray-400 ml-2">(2 tareas)</span>
                 </div>
                 <div class="flex space-x-1">
-                    <flux:button icon="pencil" size="xs" variant="filled">
-                    </flux:button>
+                    <flux:button icon="pencil" size="xs" variant="filled"></flux:button>
                 </div>
                 </div>
                 <div class="text-center py-4 text-gray-500 dark:text-gray-400">
-                No hay listas aún. ¡Crea una para comenzar!
+                    No hay listas aún. ¡Crea una para comenzar!
                 </div>
             </div>
 
         </div>
   
-        <!-- Sección de Tareas -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 md:col-span-2 border border-gray-200 dark:border-gray-700">
+        <!-- Sección de Tareas / Panel de la derecha -->
+        <div class="bg-gray-400 dark:bg-gray-800 rounded-lg shadow-md p-4 md:col-span-2 border border-gray-200 dark:border-gray-700">
            
             <div>
 
+                <!-- Título y botón Nueva Tarea -->
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-semibold text-gray-700 dark:text-white">Tareas de la Lista</h2>
-                    <flux:button icon="plus" variant="primary">
-                        Nueva Tarea
-                    </flux:button>
+                    <flux:button icon="plus" variant="primary">Nueva Tarea</flux:button>
                 </div>
 
                 <!-- Formulario Nueva Tarea -->
@@ -77,12 +70,8 @@
                         class="w-full p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-green-500"
                         rows="2"></textarea>
                     <div class="flex justify-end space-x-2">
-                        <flux:button icon="x-mark" size="xs" variant="ghost">
-                            Cancelar
-                        </flux:button>
-                        <flux:button icon="check" size="xs" variant="filled">
-                            Guardar
-                        </flux:button>
+                        <flux:button icon="x-mark" size="xs" variant="ghost">Cancelar</flux:button>
+                        <flux:button icon="check" size="xs" variant="filled">Guardar</flux:button>
                     </div>
                 </div>
 
@@ -100,10 +89,8 @@
                                 </div>
                             </div>
                             <div class="flex space-x-1">
-                                <flux:button icon="pencil" size="xs" variant="filled">
-                                </flux:button>
-                                <flux:button icon="trash" size="xs" variant="danger">
-                                </flux:button>
+                                <flux:button icon="pencil" size="xs" variant="filled"></flux:button>
+                                <flux:button icon="trash" size="xs" variant="danger"></flux:button>
                             </div>
                         </div>
                     </div>
