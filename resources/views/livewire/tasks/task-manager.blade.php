@@ -8,7 +8,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
         <!-- Sección de Listas / Panel de la izquierda -->
-        <div class="bg-gray-300 dark:bg-gray-800 rounded-lg shadow-md p-4 md:col-span-1 border border-gray-200 dark:border-gray-700">
+        <div class="bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md p-4 md:col-span-1 border border-gray-200 dark:border-gray-700">
             
             <!-- Título y botón Nueva Lista -->
             <div class="flex justify-between items-center mb-4">
@@ -21,15 +21,22 @@
             <!-- Formulario Nueva Lista -->
             <div wire:show='showCreateListForm' wire:transition class="mb-4 bg-gray-50 dark:bg-gray-700 p-3 rounded-md">
                 <h3 class="text-md font-medium mb-2 dark:text-white">Nueva Lista</h3>
-                <input 
+                <input
+                wire:model='newListName'
                 type="text"
                 placeholder="Nombre de la lista"
                 class="w-full p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-green-500">
+                <div class="mb-4">
+                    <flux:error name='newListName' />
+                </div>
+                {{-- @error('newListName')
+                    <p class="text-red-500 text-sm mb-2">{{ $message }}</p>
+                @enderror --}}
                 <div class="flex justify-end space-x-2">
-                    <flux:button wire:click='showCreateListForm = false' icon="x-mark" size="xs" variant="ghost">
+                    <flux:button wire:click='cancelCreate' icon="x-mark" size="xs" variant="ghost">
                         Cancelar
                     </flux:button>
-                    <flux:button icon="check" size="xs" variant="filled">
+                    <flux:button wire:click='createList' icon="check" size="xs" variant="filled">
                         Guardar
                     </flux:button>
                 </div>
@@ -58,7 +65,7 @@
         </div>
   
         <!-- Sección de Tareas / Panel de la derecha -->
-        <div class="bg-gray-400 dark:bg-gray-800 rounded-lg shadow-md p-4 md:col-span-2 border border-gray-200 dark:border-gray-700">
+        <div class="bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md p-4 md:col-span-2 border border-gray-200 dark:border-gray-700">
            
             <div>
 
