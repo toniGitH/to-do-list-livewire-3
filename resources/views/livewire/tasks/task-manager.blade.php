@@ -37,18 +37,22 @@
 
             <!-- Listas -->
             <div class="space-y-2 max-h-96 overflow-y-auto">
-                <div class="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors flex justify-between items-center">
-                <div class="flex-grow">
-                    <span class="font-medium text-gray-700 dark:text-white">Lista de ejemplo</span>
-                    <span class="text-xs text-gray-500 dark:text-gray-400 ml-2">(2 tareas)</span>
-                </div>
-                <div class="flex space-x-1">
-                    <flux:button icon="pencil" size="xs" variant="filled"></flux:button>
-                </div>
-                </div>
-                <div class="text-center py-4 text-gray-500 dark:text-gray-400">
-                    No hay listas aún. ¡Crea una para comenzar!
-                </div>
+                @foreach ($taskLists as $taskList)
+                    <div class="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors flex justify-between items-center">
+                        <div class="flex-grow">
+                            <p class="font-medium text-gray-700 dark:text-white">{{ $taskList->name }}</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">({{ $taskList->tasks->count() }} tareas)</p>
+                        </div>
+                        <div class="flex space-x-1">
+                            <flux:button icon="pencil" size="xs" variant="filled"></flux:button>
+                        </div>
+                    </div>
+                @endforeach
+                @if ($taskLists->isEmpty())
+                    <div class="text-center py-4 text-gray-500 dark:text-gray-400">
+                        No hay listas aún. ¡Crea una para comenzar!
+                    </div>
+                @endif
             </div>
 
         </div>
