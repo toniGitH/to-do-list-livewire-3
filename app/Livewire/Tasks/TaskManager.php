@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Tasks;
 
 use Livewire\Component;
 
@@ -8,6 +8,6 @@ class TaskManager extends Component
 {
     public function render()
     {
-        return view('livewire.task-manager');
+        return view('livewire.tasks.task-manager');
     }
 }
