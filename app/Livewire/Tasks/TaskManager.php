@@ -20,7 +20,7 @@ class TaskManager extends Component
     public function render(): View
     {
         return view('livewire.tasks.task-manager', [
-            'taskLists' => TaskList::all()
+            'taskLists' => Auth::user()->lists
         ]);
     }
 
