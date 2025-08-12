@@ -42,7 +42,7 @@
             <!-- Listas -->
             <div class="space-y-2 max-h-96 overflow-y-auto">
                 @foreach ($taskLists as $taskList)
-                    <div class="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors flex justify-between items-center">
+                    <div wire:click='selectList({{ $taskList->id }})' class="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors flex justify-between items-center">
                         <div class="flex-grow">
                             <p class="font-medium text-gray-700 dark:text-white">{{ $taskList->name }}</p>
                             <p class="text-xs text-gray-500 dark:text-gray-400">({{ $taskList->tasks->count() }} tareas)</p>
@@ -64,67 +64,68 @@
   
         <!-- Sección de Tareas / Panel de la derecha -->
         <div class="bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md p-4 md:col-span-2 border border-gray-200 dark:border-gray-700">
-           
-            <div>
-
-                <!-- Título y botón Nueva Tarea -->
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl font-semibold text-gray-700 dark:text-white">Tareas de la Lista</h2>
-                    <flux:button wire:click='showCreateTaskForm = true' icon="plus" variant="primary">Nueva Tarea</flux:button>
-                </div>
-
-                <!-- Formulario Nueva Tarea -->
-                <div wire:show='showCreateTaskForm' wire:transition class="mb-4 bg-gray-50 dark:bg-gray-700 p-3 rounded-md">
-                    <h3 class="text-md font-medium mb-2 dark:text-white">Nueva Tarea</h3>
-                    <input 
-                        type="text"
-                        placeholder="Nombre de la tarea"
-                        class="w-full p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-green-500">
-                    <textarea 
-                        placeholder="Descripción (opcional)"
-                        class="w-full p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                        rows="2"></textarea>
-                    <div class="flex justify-end space-x-2">
-                        <flux:button wire:click='cancelCreateTask' icon="x-mark" size="xs" variant="ghost">
-                            Cancelar
-                        </flux:button>
-                        <flux:button icon="check" size="xs" variant="filled">
-                            Guardar
-                        </flux:button>
+            @if ($selectedList)
+                <div>
+                    <!-- Título y botón Nueva Tarea -->
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold text-gray-700 dark:text-white">Tareas de la Lista: {{ $selectedList->name }}</h2>
+                        <flux:button wire:click='showCreateTaskForm = true' icon="plus" variant="primary">Nueva Tarea</flux:button>
                     </div>
-                </div>
 
-                <!-- Tareas -->
-                <div class="space-y-3 max-h-96 overflow-y-auto">
-                    <div class="p-3 border border-gray-200 dark:border-gray-600 rounded-md">
-                        <div class="flex items-start justify-between">
-                            <div class="flex items-start space-x-3 flex-grow">
-                                <input 
-                                type="checkbox"
-                                class="mt-1 h-4 w-4 text-green-500 focus:ring-green-400 rounded">
-                                <div>
-                                    <h4 class="font-medium text-gray-700 dark:text-white">Ejemplo de tarea</h4>
-                                    <p class="text-sm mt-1 text-gray-600 dark:text-gray-300">Descripción de ejemplo</p>
-                                </div>
-                            </div>
-                            <div class="flex space-x-1">
-                                <flux:button icon="pencil" size="xs" variant="filled"></flux:button>
-                                <flux:button icon="trash" size="xs" variant="danger"></flux:button>
-                            </div>
+                    <!-- Formulario Nueva Tarea -->
+                    <div wire:show='showCreateTaskForm' wire:transition class="mb-4 bg-gray-50 dark:bg-gray-700 p-3 rounded-md">
+                        <h3 class="text-md font-medium mb-2 dark:text-white">Nueva Tarea</h3>
+                        <input 
+                            type="text"
+                            placeholder="Nombre de la tarea"
+                            class="w-full p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <textarea 
+                            placeholder="Descripción (opcional)"
+                            class="w-full p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                            rows="2"></textarea>
+                        <div class="flex justify-end space-x-2">
+                            <flux:button wire:click='cancelCreateTask' icon="x-mark" size="xs" variant="ghost">
+                                Cancelar
+                            </flux:button>
+                            <flux:button icon="check" size="xs" variant="filled">
+                                Guardar
+                            </flux:button>
                         </div>
                     </div>
-                    <div class="text-center py-4 text-gray-500 dark:text-gray-400">
-                        No hay tareas en esta lista. ¡Agrega una para comenzar!
+
+                    <!-- Tareas -->
+                    <div class="space-y-3 max-h-96 overflow-y-auto">
+                        @if ($selectedList->tasks->isEmpty())
+                            <div class="text-center py-4 text-gray-500 dark:text-gray-400">
+                                No hay tareas en esta lista. ¡Agrega una para comenzar!
+                            </div>
+                        @else
+                            <div class="p-3 border border-gray-200 dark:border-gray-600 rounded-md">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex items-start space-x-3 flex-grow">
+                                        <input 
+                                        type="checkbox"
+                                        class="mt-1 h-4 w-4 text-green-500 focus:ring-green-400 rounded">
+                                        <div>
+                                            <h4 class="font-medium text-gray-700 dark:text-white">Ejemplo de tarea</h4>
+                                            <p class="text-sm mt-1 text-gray-600 dark:text-gray-300">Descripción de ejemplo</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-1">
+                                        <flux:button icon="pencil" size="xs" variant="filled"></flux:button>
+                                        <flux:button icon="trash" size="xs" variant="danger"></flux:button>
+                                    </div>
+                                </div>
+                            </div>  
+                        @endif
                     </div>
                 </div>
-
-            </div>
-    
-            <div class="text-center py-12 text-gray-500 dark:text-gray-400">
-                <flux:icon.list-bullet class="size-20 mx-auto" />
-                <p>Selecciona una lista para ver sus tareas</p>
-            </div>
-            
+            @else
+                <div class="text-center py-12 text-gray-500 dark:text-gray-400">
+                    <flux:icon.list-bullet class="size-20 mx-auto" />
+                    <p>Selecciona una lista para ver sus tareas</p>
+                </div>
+            @endif
         </div>
 
     </div>

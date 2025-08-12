@@ -11,13 +11,15 @@ class TaskManager extends Component
 {
     public bool $showCreateListForm = false;
 
+    public bool $showCreateTaskForm = false;
+
     public string $newListName = "";
 
     public bool $isEditing = false;
 
     public ?TaskList $editingList;
 
-    public bool $showCreateTaskForm = false;
+    public ?TaskList $selectedList;
 
     public function render(): View
     {
@@ -80,6 +82,11 @@ class TaskManager extends Component
     public function deleteList(TaskList $taskList): void
     {
         $taskList->delete();
+    }
+
+    public function selectList(TaskList $taskList)
+    {
+        $this->selectedList = $taskList;
     }
 
     protected function messages(): array
