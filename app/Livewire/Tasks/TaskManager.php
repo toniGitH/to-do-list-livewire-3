@@ -34,7 +34,9 @@ class TaskManager extends Component
     public function saveList(): void
     {
         $this->validate([
-            'newListName' => 'required|min:3|max:100|unique:task_lists,name'
+            'newListName' => $this->isEditing 
+                ? 'required|min:3|max:100|unique:task_lists,name,' . $this->editingList->id
+                : 'required|min:3|max:100|unique:task_lists,name'
         ]);
 
         if ($this->isEditing) {
@@ -70,4 +72,5 @@ class TaskManager extends Component
     {
         $taskList->delete();
     }
+
 }
