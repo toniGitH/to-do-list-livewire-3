@@ -30,7 +30,7 @@
                     <flux:error name='newListName' />
                 </div>
                 <div class="flex justify-end space-x-2">
-                    <flux:button wire:click='cancelCreate' icon="x-mark" size="xs" variant="ghost">
+                    <flux:button wire:click='cancelCreateList' icon="x-mark" size="xs" variant="ghost">
                         Cancelar
                     </flux:button>
                     <flux:button wire:click='saveList' icon="check" size="xs" variant="filled">
@@ -70,11 +70,11 @@
                 <!-- Título y botón Nueva Tarea -->
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-semibold text-gray-700 dark:text-white">Tareas de la Lista</h2>
-                    <flux:button icon="plus" variant="primary">Nueva Tarea</flux:button>
+                    <flux:button wire:click='showCreateTaskForm = true' icon="plus" variant="primary">Nueva Tarea</flux:button>
                 </div>
 
                 <!-- Formulario Nueva Tarea -->
-                <div class="mb-4 bg-gray-50 dark:bg-gray-700 p-3 rounded-md">
+                <div wire:show='showCreateTaskForm' wire:transition class="mb-4 bg-gray-50 dark:bg-gray-700 p-3 rounded-md">
                     <h3 class="text-md font-medium mb-2 dark:text-white">Nueva Tarea</h3>
                     <input 
                         type="text"
@@ -85,8 +85,12 @@
                         class="w-full p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-green-500"
                         rows="2"></textarea>
                     <div class="flex justify-end space-x-2">
-                        <flux:button icon="x-mark" size="xs" variant="ghost">Cancelar</flux:button>
-                        <flux:button icon="check" size="xs" variant="filled">Guardar</flux:button>
+                        <flux:button wire:click='cancelCreateTask' icon="x-mark" size="xs" variant="ghost">
+                            Cancelar
+                        </flux:button>
+                        <flux:button icon="check" size="xs" variant="filled">
+                            Guardar
+                        </flux:button>
                     </div>
                 </div>
 

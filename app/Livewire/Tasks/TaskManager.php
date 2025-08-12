@@ -17,6 +17,8 @@ class TaskManager extends Component
 
     public ?TaskList $editingList;
 
+    public bool $showCreateTaskForm = false;
+
     public function render(): View
     {
         return view('livewire.tasks.task-manager', [
@@ -53,11 +55,18 @@ class TaskManager extends Component
         $this->reset();
     }
 
-    public function cancelCreate(): void
+    public function cancelCreateList(): void
     {
         $this->showCreateListForm = false;
         $this->newListName = '';
         $this->resetValidation();
+    }
+
+    public function cancelCreateTask(): void
+    {
+        $this->showCreateTaskForm = false;
+        /* $this->newListName = '';
+        $this->resetValidation(); */
     }
 
     public function editList(TaskList $taskList): void
