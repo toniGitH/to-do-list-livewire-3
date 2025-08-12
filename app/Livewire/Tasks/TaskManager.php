@@ -73,4 +73,10 @@ class TaskManager extends Component
         $taskList->delete();
     }
 
+    protected function messages(): array
+    {
+        return [
+            'newListName.unique' => 'This list name has already been taken'
+        ];
+    }
 }
