@@ -5,32 +5,33 @@ namespace App\Livewire\Tasks;
 use App\Models\TaskList;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class TaskManager extends Component
 {
-    public $showCreateListForm = false;
+    public bool $showCreateListForm = false;
 
-    public $newListName = "";
+    public string $newListName = "";
 
-    public $isEditing = false;
+    public bool $isEditing = false;
 
-    public $editingList;
+    public ?TaskList $editingList;
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.tasks.task-manager', [
             'taskLists' => TaskList::all()
         ]);
     }
 
-    public function prepareCreateList()
+    public function prepareCreateList(): void
     {
         $this->showCreateListForm = true;
         $this->isEditing = false;
         $this->newListName = "";
     }
 
-    public function saveList()
+    public function saveList(): void
     {
         $this->validate([
             'newListName' => 'required|min:3|max:100|unique:task_lists,name'
@@ -50,14 +51,14 @@ class TaskManager extends Component
         $this->reset();
     }
 
-    public function cancelCreate()
+    public function cancelCreate(): void
     {
         $this->showCreateListForm = false;
         $this->newListName = '';
         $this->resetValidation();
     }
 
-    public function editList(TaskList $taskList)
+    public function editList(TaskList $taskList): void
     {
         $this->showCreateListForm = true;
         $this->isEditing = true;
@@ -65,7 +66,7 @@ class TaskManager extends Component
         $this->editingList = $taskList;
     }
 
-    public function deleteList(TaskList $taskList)
+    public function deleteList(TaskList $taskList): void
     {
         $taskList->delete();
     }
