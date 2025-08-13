@@ -80,15 +80,9 @@
                     <!-- Formulario Nueva Tarea -->
                     <div wire:show='showCreateTaskForm' wire:transition class="mb-4 bg-gray-50 dark:bg-gray-700 p-3 rounded-md">
                         <h3 class="text-md font-medium mb-2 dark:text-white">Nueva Tarea</h3>
-                        <input 
-                            type="text"
-                            placeholder="Nombre de la tarea"
-                            class="w-full p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-green-500">
-                        <textarea 
-                            placeholder="Descripción (opcional)"
-                            class="w-full p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                            rows="2"></textarea>
-                        <div class="flex justify-end space-x-2">
+                        <flux:input type="text" placeholder="Nombre de la tarea" wire:model='newTaskName' />
+                        <flux:textarea rows="2" placeholder="Descripción (opcional)" wire:model='newTaskDescription' class="mt-3" />
+                        <div class="flex justify-end space-x-2 mt-5">
                             <flux:button wire:click='cancelCreateTask' icon="x-mark" size="xs" variant="ghost">
                                 Cancelar
                             </flux:button>
