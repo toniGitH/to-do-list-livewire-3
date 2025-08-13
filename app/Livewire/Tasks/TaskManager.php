@@ -9,16 +9,16 @@ use Illuminate\View\View;
 
 class TaskManager extends Component
 {
-    public bool $showCreateListForm = false;
-
-    public bool $showCreateTaskForm = false;
-
     public string $newListName = "";
+    public string $newTaskName = "";
+    public string $newTaskDescription = "";
+
+    public bool $showCreateListForm = false;
+    public bool $showCreateTaskForm = false;
 
     public bool $isEditing = false;
 
     public ?TaskList $editingList;
-
     public ?TaskList $selectedList;
 
     public function render(): View
@@ -67,8 +67,9 @@ class TaskManager extends Component
     public function cancelCreateTask(): void
     {
         $this->showCreateTaskForm = false;
-        /* $this->newListName = '';
-        $this->resetValidation(); */
+        $this->newTaskName = '';
+        $this->newTaskDescription = '';
+        $this->resetValidation();
     }
 
     public function editList(TaskList $taskList): void
@@ -84,9 +85,25 @@ class TaskManager extends Component
         $taskList->delete();
     }
 
-    public function selectList(TaskList $taskList)
+    public function selectList(TaskList $taskList): void
     {
         $this->selectedList = $taskList;
+    }
+
+    public function saveTask(): void
+    {
+        $this->validate([
+            'newTaskName' => 'required|min:3|max:255',
+            'newTaskDescription' => "nullable|max:255"
+        ]);
+
+        $this->selectedList->tasks()->create([
+            'title' => $this->newTaskName,
+            'description' => $this->newTaskDescription
+        ]);
+
+        $this->reset();
+
     }
 
     protected function messages(): array
