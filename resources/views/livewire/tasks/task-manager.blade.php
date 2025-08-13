@@ -42,7 +42,12 @@
             <!-- Listas -->
             <div class="space-y-2 max-h-96 overflow-y-auto">
                 @foreach ($taskLists as $taskList)
-                    <div wire:click='selectList({{ $taskList->id }})' class="p-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors flex justify-between items-center">
+                    <div wire:click='selectList({{ $taskList->id }})'
+                         @class([
+                            'p-3 rounded-md hover:bg-gray-50 cursor-pointer transition-colors flex justify-between items-center',
+                            'bg-gray-50 hover:bg-gray-50' => $selectedList?->id === $taskList->id,
+                         ]) 
+                    >
                         <div class="flex-grow">
                             <p class="font-medium text-gray-700 dark:text-white">{{ $taskList->name }}</p>
                             <p class="text-xs text-gray-500 dark:text-gray-400">({{ $taskList->tasks->count() }} tareas)</p>
