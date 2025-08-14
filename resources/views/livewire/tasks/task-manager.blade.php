@@ -105,23 +105,26 @@
                                 No hay tareas en esta lista. ¡Agrega una para comenzar!
                             </div>
                         @else
-                            <div class="p-3 border border-gray-200 dark:border-gray-600 rounded-md">
-                                <div class="flex items-start justify-between">
-                                    <div class="flex items-start space-x-3 flex-grow">
-                                        <input 
-                                        type="checkbox"
-                                        class="mt-1 h-4 w-4 text-green-500 focus:ring-green-400 rounded">
-                                        <div>
-                                            <h4 class="font-medium text-gray-700 dark:text-white">Ejemplo de tarea</h4>
-                                            <p class="text-sm mt-1 text-gray-600 dark:text-gray-300">Descripción de ejemplo</p>
+                            @foreach ($selectedList->tasks as $task)
+                                <div class="p-3 border border-gray-200 dark:border-gray-600 rounded-md">
+                                    <div class="flex items-start justify-between">
+                                        <div class="flex items-start space-x-3 flex-grow">
+                                            <input 
+                                            type="checkbox"
+                                            class="mt-1 h-4 w-4 text-green-500 focus:ring-green-400 rounded">
+                                            <div>
+                                                <h4 class="font-medium text-gray-700 dark:text-white">{{ $task->title }}</h4>
+                                                <p class="text-sm mt-1 text-gray-600 dark:text-gray-300">{{ $task->description }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex space-x-1">
+                                            <flux:button icon="pencil" size="xs" variant="filled"></flux:button>
+                                            <flux:button icon="trash" size="xs" variant="danger"></flux:button>
                                         </div>
                                     </div>
-                                    <div class="flex space-x-1">
-                                        <flux:button icon="pencil" size="xs" variant="filled"></flux:button>
-                                        <flux:button icon="trash" size="xs" variant="danger"></flux:button>
-                                    </div>
-                                </div>
-                            </div>  
+                                </div>   
+                            @endforeach
+   
                         @endif
                     </div>
                 </div>

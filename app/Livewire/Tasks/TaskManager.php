@@ -102,8 +102,7 @@ class TaskManager extends Component
             'description' => $this->newTaskDescription
         ]);
 
-        $this->reset();
-
+        $this->reset('newTaskName', 'newTaskDescription', 'showCreateTaskForm');
     }
 
     protected function messages(): array
