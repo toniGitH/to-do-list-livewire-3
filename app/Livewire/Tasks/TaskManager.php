@@ -141,6 +141,13 @@ class TaskManager extends Component
         $task->delete();
     }
 
+    public function toggleTaskDone(Task $task): void
+    {
+        $task->update([
+            'done_at' => $task->done_at ? null : now()
+        ]);
+    }
+
     protected function messages(): array
     {
         return [
