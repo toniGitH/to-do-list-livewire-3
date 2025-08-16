@@ -36,6 +36,7 @@ class TaskManager extends Component
         $this->showCreateListForm = true;
         $this->isEditingList = false;
         $this->newListName = "";
+        $this->resetValidation();
     }
 
     public function saveList(): void
@@ -81,6 +82,7 @@ class TaskManager extends Component
         $this->isEditingList = true;
         $this->newListName = $taskList->name;
         $this->editingList = $taskList;
+        $this->resetValidation();
     }
 
     public function deleteList(TaskList $taskList): void
@@ -122,6 +124,7 @@ class TaskManager extends Component
         $this->isEditingTask = true;
         $this->newTaskName = $task->title;
         $this->newTaskDescription = $task->description;
+        $this->resetValidation();
     }
 
     protected function messages(): array
