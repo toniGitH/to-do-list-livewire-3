@@ -20,7 +20,7 @@
 
             <!-- Formulario Nueva Lista -->
             <div wire:show='showCreateListForm' wire:transition class="mb-4 bg-gray-50 dark:bg-gray-700 p-3 rounded-md">
-                <h3 class="text-md font-medium mb-2 dark:text-white">{{ $isEditing ? 'Editar' : 'Nueva' }} Lista</h3>
+                <h3 class="text-md font-medium mb-2 dark:text-white">{{ $isEditingList ? 'Editar' : 'Nueva' }} Lista</h3>
                 <input
                 wire:model='newListName'
                 type="text"
@@ -34,7 +34,7 @@
                         Cancelar
                     </flux:button>
                     <flux:button wire:click='saveList' icon="check" size="xs" variant="filled">
-                        {{ $isEditing ? 'Actualizar' : 'Guardar' }}
+                        {{ $isEditingList ? 'Actualizar' : 'Guardar' }}
                     </flux:button>
                 </div>
             </div>
@@ -118,7 +118,7 @@
                                             </div>
                                         </div>
                                         <div class="flex space-x-1">
-                                            <flux:button icon="pencil" size="xs" variant="filled"></flux:button>
+                                            <flux:button wire:click='editTask({{ $task->id }})' icon="pencil" size="xs" variant="filled"></flux:button>
                                             <flux:button icon="trash" size="xs" variant="danger"></flux:button>
                                         </div>
                                     </div>

@@ -3,6 +3,7 @@
 namespace App\Livewire\Tasks;
 
 use App\Models\TaskList;
+use App\Models\Task;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -16,10 +17,12 @@ class TaskManager extends Component
     public bool $showCreateListForm = false;
     public bool $showCreateTaskForm = false;
 
-    public bool $isEditing = false;
+    public bool $isEditingList = false;
+    public bool $isEditingTask = false;
 
     public ?TaskList $editingList;
     public ?TaskList $selectedList;
+    public ?Task $editingTask;
 
     public function render(): View
     {
@@ -31,19 +34,19 @@ class TaskManager extends Component
     public function prepareCreateList(): void
     {
         $this->showCreateListForm = true;
-        $this->isEditing = false;
+        $this->isEditingList = false;
         $this->newListName = "";
     }
 
     public function saveList(): void
     {
         $this->validate([
-            'newListName' => $this->isEditing 
+            'newListName' => $this->isEditingList
                 ? 'required|min:3|max:100|unique:task_lists,name,' . $this->editingList->id
                 : 'required|min:3|max:100|unique:task_lists,name'
         ]);
 
-        if ($this->isEditing) {
+        if ($this->isEditingList) {
             $this->editingList->update([
                 'name' => $this->newListName
             ]);
@@ -75,7 +78,7 @@ class TaskManager extends Component
     public function editList(TaskList $taskList): void
     {
         $this->showCreateListForm = true;
-        $this->isEditing = true;
+        $this->isEditingList = true;
         $this->newListName = $taskList->name;
         $this->editingList = $taskList;
     }
@@ -103,6 +106,15 @@ class TaskManager extends Component
         ]);
 
         $this->reset('newTaskName', 'newTaskDescription', 'showCreateTaskForm');
+    }
+
+    public function editTask(Task $task): void
+    {
+        $this->editingTask = $task;
+        $this->showCreateTaskForm = true;
+        $this->isEditingTask = true;
+        $this->newTaskName = $task->title;
+        $this->newTaskDescription = $task->description;
     }
 
     protected function messages(): array
