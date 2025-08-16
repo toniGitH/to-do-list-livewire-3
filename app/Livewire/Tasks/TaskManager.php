@@ -100,12 +100,19 @@ class TaskManager extends Component
             'newTaskDescription' => "nullable|max:255"
         ]);
 
-        $this->selectedList->tasks()->create([
-            'title' => $this->newTaskName,
-            'description' => $this->newTaskDescription
-        ]);
+        if ($this->isEditingTask) {
+            $this->editingTask->update([
+                'title' => $this->newTaskName,
+                'description' => $this->newTaskDescription
+            ]);
+        } else {
+            $this->selectedList->tasks()->create([
+                'title' => $this->newTaskName,
+                'description' => $this->newTaskDescription
+            ]);
+        }
 
-        $this->reset('newTaskName', 'newTaskDescription', 'showCreateTaskForm');
+        $this->reset('newTaskName', 'newTaskDescription', 'showCreateTaskForm', 'isEditingTask', 'editingTask');
     }
 
     public function editTask(Task $task): void

@@ -79,7 +79,7 @@
 
                     <!-- Formulario Nueva Tarea -->
                     <div wire:show='showCreateTaskForm' wire:transition class="mb-4 bg-gray-50 dark:bg-gray-700 p-3 rounded-md">
-                        <h3 class="text-md font-medium mb-2 dark:text-white">Nueva Tarea</h3>
+                        <h3 class="text-md font-medium mb-2 dark:text-white">{{ $isEditingTask ? 'Editar' : 'Nueva' }} Tarea</h3>
                         <flux:input type="text" placeholder="Nombre de la tarea" wire:model='newTaskName' />
                         <div class="mb-4">
                             <flux:error name='newTaskName' />
@@ -93,7 +93,7 @@
                                 Cancelar
                             </flux:button>
                             <flux:button wire:click='saveTask' icon="check" size="xs" variant="filled">
-                                Guardar
+                                {{ $isEditingTask ? 'Actualizar' : 'Guardar' }}
                             </flux:button>
                         </div>
                     </div>
