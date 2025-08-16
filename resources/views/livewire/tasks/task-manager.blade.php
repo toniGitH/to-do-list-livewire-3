@@ -74,7 +74,9 @@
                     <!-- Título y botón Nueva Tarea -->
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="text-xl font-semibold text-gray-700 dark:text-white">Tareas de la Lista: {{ $selectedList->name }}</h2>
-                        <flux:button wire:click='showCreateTaskForm = true' icon="plus" variant="primary">Nueva Tarea</flux:button>
+                        <flux:button wire:click='prepareCreateTask' icon="plus" variant="primary">
+                            Nueva Tarea
+                        </flux:button>
                     </div>
 
                     <!-- Formulario Nueva Tarea -->

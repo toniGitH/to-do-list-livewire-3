@@ -95,6 +95,15 @@ class TaskManager extends Component
         $this->selectedList = $taskList;
     }
 
+    public function prepareCreateTask(): void
+    {
+        $this->showCreateTaskForm = true;
+        $this->isEditingTask = false;
+        $this->newTaskName = "";
+        $this->newTaskDescription = "";
+        $this->resetValidation();
+    }
+
     public function saveTask(): void
     {
         $this->validate([
