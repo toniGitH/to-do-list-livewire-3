@@ -121,7 +121,7 @@
                                         </div>
                                         <div class="flex space-x-1">
                                             <flux:button wire:click='editTask({{ $task->id }})' icon="pencil" size="xs" variant="filled"></flux:button>
-                                            <flux:button icon="trash" size="xs" variant="danger"></flux:button>
+                                            <flux:button wire:click='deleteTask({{ $task->id }})' icon="trash" size="xs" variant="danger"></flux:button>
                                         </div>
                                     </div>
                                 </div>   

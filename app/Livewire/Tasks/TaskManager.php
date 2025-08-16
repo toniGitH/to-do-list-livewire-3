@@ -136,6 +136,11 @@ class TaskManager extends Component
         $this->resetValidation();
     }
 
+    public function deleteTask(Task $task): void
+    {
+        $task->delete();
+    }
+
     protected function messages(): array
     {
         return [
