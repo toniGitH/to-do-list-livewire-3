@@ -49,17 +49,12 @@ class TaskLists extends Component
             ]);
         }
         
-        $this->reset('newListName', 'showCreateListForm', 'isEditingList', 'editingList');
-        $this->resetValidation();
+        $this->resetListForm();
     }
 
     public function cancelCreateList(): void
     {
-        $this->showCreateListForm = false;
-        $this->newListName = '';
-        $this->isEditingList = false;
-        $this->editingList = null;
-        $this->resetValidation();
+        $this->resetListForm();
     }
 
     public function editList(TaskList $taskList): void
@@ -85,6 +80,12 @@ class TaskLists extends Component
     {
         $this->selectedList = $taskList;
         $this->dispatch('list-selected', listId: $taskList->id);
+    }
+
+    private function resetListForm(): void
+    {
+        $this->reset('newListName', 'showCreateListForm', 'isEditingList', 'editingList');
+        $this->resetValidation();
     }
 
     protected function messages(): array
