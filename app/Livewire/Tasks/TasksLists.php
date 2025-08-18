@@ -27,6 +27,8 @@ class TasksLists extends Component
         $this->showCreateListForm = true;
         $this->isEditingList = false;
         $this->newListName = "";
+        $this->selectedList = null; // NUEVO
+        $this->dispatch('list-deselected'); //NUEVO
         $this->resetValidation();
     }
 
@@ -80,6 +82,7 @@ class TasksLists extends Component
     {
         $this->selectedList = $taskList;
         $this->dispatch('list-selected', listId: $taskList->id);
+        $this->showCreateListForm = false;
     }
 
     private function resetListForm(): void
