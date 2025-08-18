@@ -12,8 +12,8 @@ class TaskLists extends Component
     public string $newListName = "";
     public bool $showCreateListForm = false;
     public bool $isEditingList = false;
-    public ?TaskList $editingList;
-    public ?TaskList $selectedList;
+    public ?TaskList $editingList = null;
+    public ?TaskList $selectedList = null;
 
     public function render(): View
     {
