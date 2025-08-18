@@ -19,7 +19,7 @@ class TasksPanel extends Component
 
     public function render(): View
     {
-        return view('livewire.tasks.tasks-panel.blade');
+        return view('livewire.tasks.tasks-panel');
     }
 
     #[On('list-selected')] // Método que se ejecuta al lanzarse este evento en TasksLists

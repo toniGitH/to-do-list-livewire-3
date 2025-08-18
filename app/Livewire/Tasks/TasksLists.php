@@ -7,7 +7,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
-class TaskLists extends Component
+class TasksLists extends Component
 {
     public string $newListName = "";
     public bool $showCreateListForm = false;
@@ -17,7 +17,7 @@ class TaskLists extends Component
 
     public function render(): View
     {
-        return view('livewire.tasks.task-lists', [
+        return view('livewire.tasks.tasks-lists', [
             'taskLists' => Auth::user()->lists
         ]);
     }
