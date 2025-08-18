@@ -44,7 +44,7 @@
                     <p class="text-xs text-gray-500 dark:text-gray-400">({{ $taskList->tasks->count() }} tareas)</p>
                 </div>
                 <div class="flex space-x-1">
-                    <flux:button wire:click='editList({{ $taskList->id }})' icon="pencil" size="xs" variant="filled"></flux:button>
+                    <flux:button wire:click.stop='editList({{ $taskList->id }})' icon="pencil" size="xs" variant="filled"></flux:button>
                     <flux:button wire:confirm='¿Estás seguro de que quieres eliminar esta lista?' wire:click='deleteList({{ $taskList->id }})' icon="trash" size="xs" variant="danger"></flux:button>
                 </div>
             </div>
