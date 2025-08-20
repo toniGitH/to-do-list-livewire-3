@@ -76,7 +76,7 @@ En el panel derecho (Tareas), se puede:
 
 ---
 
-## 🧩 Estructura de la aplicación. Versión 1 (un solo componente Livewire 3)
+## 🧩 Estructura de la aplicación. V.1 (1 componente Livewire 3)
 
 La aplicación está construida utilizando **un único componente de Livewire 3** para gestionar tanto las listas como las tareas de las listas.
 
